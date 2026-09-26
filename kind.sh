@@ -56,7 +56,7 @@ main() {
     fi
 
     echo 'Adding kubectl and kind directory to PATH...'
-    export PATH="install_dir:$PATH"
+    export PATH="${install_dir}:$PATH"
 
     "${install_dir}/kind" version
     "${install_dir}/kubectl" version --client=true
@@ -71,14 +71,14 @@ main() {
 }
 
 install_kind() {
-    echo 'Installing kind...'
+    echo "Installing kind version ${version}..."
 
     curl -sSLo "${install_dir}/kind" "https://github.com/kubernetes-sigs/kind/releases/download/${version}/kind-linux-${arch}"
     chmod +x "${install_dir}/kind"
 }
 
 install_kubectl() {
-    echo 'Installing kubectl...'
+    echo "Installing kubectl version ${kubectl_version}..."
 
     curl -sSLo "${install_dir}/kubectl" "https://dl.k8s.io/release/${kubectl_version}/bin/linux/${arch}/kubectl"
 
