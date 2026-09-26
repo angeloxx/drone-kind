@@ -16,10 +16,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: angeloxx/drone-kind
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref_type == 'branch' }}
+            type=ref,event=tag
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: angeloxx/drone-kind:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            KIND_VERSION=${{ github.ref_type == 'tag' && format('v{0}.0', github.ref_name) || 'v0.33.0' }}
 
