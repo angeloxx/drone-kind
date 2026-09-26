@@ -32,5 +32,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
-            KIND_VERSION=${{ github.ref_type == 'tag' && format('v{0}.0', github.ref_name) || 'v0.33.0' }}
+            KIND_VERSION=${{ github.ref_type == 'tag' && format('v{0}', github.ref_name) || 'v0.33.0' }}
 
