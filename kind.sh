@@ -80,7 +80,8 @@ install_kind() {
 install_kubectl() {
     echo 'Installing kubectl...'
 
-    curl -sSLo "${install_dir}/kubectl" "https://storage.googleapis.com/kubernetes-release/release/${kubectl_version}/bin/linux/${arch}/kubectl"
+    curl -sSLo "${install_dir}/kubectl" "https://dl.k8s.io/release/${kubectl_version}/bin/linux/${arch}/kubectl"
+
     chmod +x "${install_dir}/kubectl"
 }
 
